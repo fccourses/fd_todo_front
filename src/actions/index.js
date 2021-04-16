@@ -15,12 +15,12 @@ export const createTaskError = ({ error }) => ({
   payload: { error },
 });
 
-export const getTaskRequest = ({ page, limit } = {}) => ({
+export const getTasksRequest = ({ page, limit } = {}) => ({
   type: ACTION_TYPES.GET_TASK_REQUEST,
   payload: { page, limit },
 });
 
-export const getTaskSuccess = ({ tasks } = {}) => ({
+export const getTasksSuccess = ({ tasks } = {}) => ({
   type: ACTION_TYPES.GET_TASK_SUCCESS,
   payload: { tasks },
 });
@@ -28,4 +28,23 @@ export const getTaskSuccess = ({ tasks } = {}) => ({
 export const getTasksError = ({ error }) => ({
   type: ACTION_TYPES.GET_TASK_ERROR,
   payload: { error },
+});
+
+export const deleteTaskRequest = ({ id } = {}) => ({
+  type: ACTION_TYPES.DELETE_TASK_REQUEST,
+  payload: { id },
+});
+
+export const deleteTaskSuccess = ({ id } = {}) => ({
+  type: ACTION_TYPES.DELETE_TASK_SUCCESS,
+  payload: { id },
+});
+
+export const deleteTaskError = ({ error }) => ({
+  type: ACTION_TYPES.DELETE_TASK_ERROR,
+  payload: { error },
+});
+
+export const clearTaskError = () => ({
+  type: ACTION_TYPES.CLEAR_TASK_ERROR,
 });

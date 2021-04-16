@@ -8,4 +8,10 @@ const http = axios.create({
 export const getTasks = ({ userId = 1 } = {}) =>
   http.get(`/users/${userId}/tasks`);
 
+export const createTask = (taskData, userId = 1) =>
+  http.post(`/users/${userId}/tasks`, taskData);
+
+export const deleteTask = ({ id, userId = 1 } = {}) =>
+  http.delete(`/users/${userId}/tasks/${id}`);
+
 export default http;

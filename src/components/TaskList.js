@@ -1,28 +1,41 @@
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as ActionCreators from '../actions';
+import Task from './Task';
 
 const TaskList = props => {
-  const { tasks, isFetching, error, getTasksAction } = props;
+  const { tasks, isFetching, error } = useSelector(state => state.task);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getTasksAction();
-  }, [getTasksAction]);
+    dispatch(ActionCreators.getTasksRequest());
+  }, [dispatch]);
 
   return (
     <div>
+      <span style={{ color: 'red' }}>
+        {error && (
+          <>
+            {error.message}
+            <button onClick={() => dispatch(ActionCreators.clearTaskError())}>
+              X
+            </button>
+          </>
+        )}
+      </span>
       {tasks.map(t => (
-        <div key={t.id}>{JSON.stringify(t)}</div>
+        <Task {...t} key={t.id} />
       ))}
     </div>
   );
 };
 
+/*
 const mapStateToProps = ({ task }) => task;
 const mapDispatchToProps = dispatch => ({
   getTasksAction: () => dispatch(ActionCreators.getTaskRequest()),
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+ */
+export default TaskList;
 
 // <TaskList{...oldProps, ...propsFromMapStateToProps}/>
